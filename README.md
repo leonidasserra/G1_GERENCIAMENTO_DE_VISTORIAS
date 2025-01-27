@@ -1,6 +1,6 @@
 Reconhecimentos e Direitos Autorais
 
-@autor: [Leônidas Serra, Isabela OLiveira,Maria Laura, Luís Felipe, Antonio Claudino]
+@autor: [Leônidas Serra, Isabela OLiveira, Maria Laura, Luís Felipe, Antonio Claudino]
 
 @contato: [Seus Emails - se quiserem]
 
