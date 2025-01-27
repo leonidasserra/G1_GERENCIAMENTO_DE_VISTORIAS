@@ -8,7 +8,7 @@ Reconhecimentos e Direitos Autorais
 
 @versão: 1.0
 
-@outros repositórios: [URLs - apontem para os seus Gits, se quiserem]
+@outros repositórios: [https://github.com/leonidasserra/G1_GERENCIAMENTO_DE_VISTORIAS]
 
 @Agradecimentos: Universidade Federal do Maranhão (UFMA), Professor Doutor Thales Levi Azevedo Valente, e colegas de curso.
 
