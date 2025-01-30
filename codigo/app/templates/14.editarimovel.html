@@ -221,9 +221,9 @@
     <aside class="sidebar">
         <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
         <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-        <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-        <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-        <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+        <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+        <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+        <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
         <div class="logout">
             <a href="{{ url_for('views.login') }}">Sair</a>
         </div>
@@ -236,32 +236,46 @@
 
         <div class="emissao_relatorio">
             <div class="relatorio-image">
-                <img src="pexels-binyaminmellish-1396122 (1).jpg"  width="150" height="100">
+                <img src="{{ url_for('static', filename='images/casa-calhau.png') }}" width="150" height="100" />
             </div>
             <div class="relatorio-content">
                 <h3>Casa no Calhau</h3>
-                <br>
+                <br />
                 <p>Data Agendada: DD/MM/AAAA</p>
                 <p>Proprietário do Imóvel: José Maria</p>
             </div>
-            <a href="#" class="visualizar-link">Editar Imóvel</a>
-            <a href="14.1.desejadesativ.html" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
+            <!-- Exemplo de link para editar imóvel (ajuste conforme seu endpoint Python) -->
+            <a href="{{ url_for('views.pos_agendamento') }}" class="visualizar-link">Editar Imóvel</a>
+            <a href="#" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
         </div>
 
         <div class="emissao_relatorio">
             <div class="relatorio-image">
-                <img src="aap.jpg"  width="150" height="100">
+                <img src="{{ url_for('static', filename='images/casa-calhau.png') }}" width="150" height="100" />
             </div>
             <div class="relatorio-content">
                 <h3>Apartamento no Olho D'água</h3>
-                <br>
+                <br />
                 <p>Data Agendada: DD/MM/AAAA</p>
                 <p>Proprietário do Imóvel: Hodete Pereira Alencar</p>
             </div>
-
-            <!--LEONIDAS, NESSE SEGUNDO HREF TU PRECISA COLOCAR A URL DE 14.1 DESEJA DESATIVAR O IMOVEL-->
             <a href="#" class="visualizar-link">Editar Imóvel</a>
-            <a href="14.1.desejadesativ.html" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
+            <a href="{{ url_for('views.deseja_desativar', imovel_id=imovel['id']) }}" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
         </div>
+
+        <!--Parte do overlay-->
+       <!--- <div class="overlay">
+            <div class="modal">
+                <h2>Deseja desativar o imóvel?</h2>
+                <div class="modal-buttons">
+                    <button class="btn">Sim</button> -->
+                    <!--LEONIDAS NESSE HREF TU PRECISA COLOCAR A URL DE 14.editarimovel-->
+                    <!---<a href="{{ url_for('views.editar_imovel', imovel_id=imovel['id']) }}">
+                        <button class="btn">Não</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>-->
 </body>
 </html>

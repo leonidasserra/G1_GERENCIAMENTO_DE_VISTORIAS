@@ -221,36 +221,36 @@
 <aside class="sidebar">
     <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
     <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
     <div class="logout">
         <a href="{{ url_for('views.login') }}">Sair</a>
     </div>
 </aside>
 
-    <main class="main-content">
-        <div class="header">
-            <h1>Configurações</h1>
-        </div>
-            <div class="relatorio-content">
-                <!--LEONIDAS, NESSE HREF TU PRECISAA COLOCAR A URL DE 13.EDITARCADASTRO-->
-                <a href="13.editarcadastro.html" class="visualizar-link"><h3>Editar Cadastro</h3></a>
-            </div>
-        </div>
+<main class="main-content">
+    <div class="header">
+        <h1>Configurações</h1>
+    </div>
 
-     </div>
     <div class="relatorio-content">
-        <!--LEONIDAS, NESSE HREF TU PRECISAA COLOCAR A URL DE 14.EDITARIMOVEL-->
-        <a href="14.editarimovel.html" class="visualizar-link"><h3>Editar Imóvel</h3></a>
-    </div>
+        <!--LEONIDAS, NESSE HREF TU PRECISAA COLOCAR A URL (endpoint) de 13.editarcadastro-->
+        <!-- Exemplo: url_for('views.editar_cadastro') -->
+        <a href="{{ url_for('views.editar_cadastro') }}" class="visualizar-link"><h3>Editar Cadastro</h3></a>
     </div>
 
+    <div class="relatorio-content">
+        <!--LEONIDAS, NESSE HREF TU PRECISAA COLOCAR A URL (endpoint) de 14.editarimovel-->
+        <!-- Exemplo: url_for('views.editar_imovel') -->
+        <a href="{{ url_for('views.editar_imovel', imovel_id=1) }}" class="visualizar-link"><h3>Editar Imóvel</h3></a>
     </div>
+
     <div class="relatorio-content">
         <a href="#" class="visualizar-link"><h3>Excluir Conta</h3></a>
     </div>
-    </div>
+</main>
+
 
 </body>
 </html>

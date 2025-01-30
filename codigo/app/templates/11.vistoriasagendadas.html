@@ -221,13 +221,14 @@
 <aside class="sidebar">
     <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
     <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
     <div class="logout">
         <a href="{{ url_for('views.login') }}">Sair</a>
     </div>
 </aside>
+
 
     <main class="main-content">
         <div class="header">
@@ -236,7 +237,7 @@
 
         <div class="emissao_relatorio">
             <div class="relatorio-image">
-                <img src="pexels-binyaminmellish-1396122 (1).jpg"  width="150" height="100">
+                <img src="{{ url_for('static', filename='images/casa-calhau.png') }}"  width="150" height="100">
             </div>
             <div class="relatorio-content">
                 <h3>Casa no Calhau</h3>
@@ -250,7 +251,7 @@
 
         <div class="emissao_relatorio">
             <div class="relatorio-image">
-                <img src="aap.jpg"  width="150" height="100">
+                <img src="{{ url_for('static', filename='images/aap.jpg') }}"  width="150" height="100">
             </div>
             <div class="relatorio-content">
                 <h3>Apartamento no Olho D'água</h3>

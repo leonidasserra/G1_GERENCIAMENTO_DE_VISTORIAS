@@ -294,12 +294,14 @@
 <aside class="sidebar">
     <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
     <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
     <div class="logout">
         <a href="{{ url_for('views.login') }}">Sair</a>
     </div>
+</aside>
+
 </aside>
 
     <main class="main-content">
@@ -342,12 +344,17 @@
         <!--Parte do overlay-->
         <div class="overlay">
             <div class="modal">
-                <h2>Deseja realizar a vistoria?</h2>
+                <h2>Deseja realmente iniciar a vistoria?</h2>
                 <div class="modal-buttons">
-                    <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 8.VISTORIA -->
-                    <a href="#"><button class="btn">Sim</button></a>
-                    <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 7. POSAGEND-->
-                    <a href="#"><button class="btn">Não</button></a>
+                    <!-- Botão "Sim" leva para a realização da vistoria -->
+                    <a href="{{ url_for('views.vistoria', imovel_id=request.args.get('imovel_id')) }}">
+                        <button class="btn">Sim</button>
+                    </a>
+                    
+                    <!-- Botão "Não" volta para a tela de pós-agendamento -->
+                    <a href="{{ url_for('views.pos_agendamento') }}">
+                        <button class="btn">Não</button>
+                    </a>
                 </div>
             </div>
         </div>

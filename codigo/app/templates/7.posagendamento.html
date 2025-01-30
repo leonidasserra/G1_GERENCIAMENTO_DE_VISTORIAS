@@ -194,9 +194,10 @@
 <aside class="sidebar">
     <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
     <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
+    
     <div class="logout">
         <a href="{{ url_for('views.login') }}">Sair</a>
     </div>
@@ -209,7 +210,7 @@
 
         <div class="property-card">
             <div class="property-image-container">
-                <img src="{{ url_for('static', filename='images/pexels-binyaminmellish-1396122.jpg') }}" alt="Casa no Calhau" class="property-image">
+                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}" alt="Casa no Calhau" class="property-image">
             </div>
             <div class="property-info-container">
                 <h2>Casa no Calhau</h2>
@@ -220,9 +221,9 @@
                 <!--AMIGO, BEM AQUI, ASSIM QUE ELE CLICA EM INICIAR VISTORIA, ELE TEM QUE IR PRO 7.2 DESEJA REALIZAR,
                 AI NO BOTÃO SIM, TU VAI PRA VIEWS.VISTORIA, O BOTÃO NÃO, TU VOLTA PRA ESSA MESMA PAGINA-->
                 <!--TB PERCEBI QUE A PORRA DO BOTÃO DE REAGENDAR SUMIU, CASO TU COLOQUE ELE DNV, A MESMA COISA, ELE TEM QUE IR PRO 7.1, AI NO BOTAO SIM, ELE VOLTA PARA 6.IMOVEL E SE NN, ELE VOLTA PRA ESSA MESMA PAGINA-->
-                <a href="{{ url_for('views.vistoria', imovel_id=imovel.id) }}">
-                    <button class="schedule-visit">Iniciar Vistoria</button>
-                </a>
+                <a href="{{ url_for('views.deseja_realizar', imovel_id=imovel['id']) }}">
+                    <button class="schedule-visit">Realizar Vistoria</button>
+                </a>               
             </div>
         </div>
 

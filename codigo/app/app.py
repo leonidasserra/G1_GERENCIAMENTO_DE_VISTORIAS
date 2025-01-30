@@ -43,6 +43,8 @@ def create_app():
     app.config['SESSION_PERMANENT'] = False
     app.config['SESSION_USE_SIGNER'] = True
     app.config['SECRET_KEY'] = 'chave_super_segura'
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static', 'uploads')
+    app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # Exemplo: limita tamanho a 5MB
     Session(app)
 
     return app

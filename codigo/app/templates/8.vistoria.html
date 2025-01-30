@@ -202,38 +202,45 @@
         </div>
     </header>
 
-<!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
-<aside class="sidebar">
-    <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
-    <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
-    <div class="logout">
-        <a href="{{ url_for('views.login') }}">Sair</a>
-    </div>
-</aside>
+    <!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+    <aside class="sidebar">
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+        <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+        <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>    
+        <div class="logout">
+            <a href="{{ url_for('views.login') }}">Sair</a>
+        </div>
+    </aside>
 
     <main class="main-content">
         <div class="header">
             <h1>Vistoria do Imóvel</h1>
         </div>
 
+        <!-- Exemplo de exibir dados do imóvel e a data, puxados da rota -->
         <div class="property-card">
             <div class="property-image-container">
-                <img src="{{ url_for('static', filename='images/pexels-binyaminmellish-1396122.jpg') }}" alt="Casa no Calhau" class="property-image">
+                <!-- Ajuste o 'src' caso precise usar a imagem do próprio imóvel -->
+                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}"
+                     alt="Casa no Calhau"
+                     class="property-image">
             </div>
             <div class="property-info-container">
-                <h2>Casa no Calhau</h2>
+                <!-- Caso 'imovel' e 'data_vistoria' sejam passados pela rota -->
+                <h2>{{ imovel.nome if imovel else 'Nome do Imóvel' }}</h2>
                 <p>São Luis, Maranhão/MA</p>
-                <p><strong>Data Agendada:</strong> {{ data_agendamento }}</p>
+                <p><strong>Data Agendada:</strong> {{ data_vistoria if data_vistoria else 'Data não informada' }}</p>
             </div>
         </div>
 
         <br>
         <h1 style="font-size: 20px;">Informações Sobre a Vistoria</h1>
         
-        <form action="{{ url_for('views.vistoria_finalizada') }}" method="POST" enctype="multipart/form-data">
+        <!-- Ação ajustada para chamar a rota 'views.vistoria' com o ID do imóvel -->
+        <!-- Necessário que sua rota aceite POST e processe esses campos -->
+        <form  action="{{ url_for('views.vistoria_finalizada') }}" method="POST" enctype="multipart/form-data">
             <div class="vistoria">
                 <h3>Título</h3>
                 <br>
@@ -241,15 +248,18 @@
 
                 <h3>Descrição</h3>
                 <br>
-                <textarea class="input-style" name="descricao" id="descricao" placeholder="Descrição da Situação do Imóvel" required></textarea>
+                <textarea class="input-style" name="descricao" id="descricao"
+                          placeholder="Descrição da Situação do Imóvel" required></textarea>
 
                 <h3>Observações Importantes</h3>
                 <br>
-                <textarea class="input-style" name="observacoes" id="observacoes" placeholder="Observações"></textarea>
+                <textarea class="input-style" name="observacoes" id="observacoes"
+                          placeholder="Observações"></textarea>
 
                 <h3>Anexar Fotos</h3>
                 <br>
-                <input type="file" name="fotos" multiple>
+                <!-- Para anexar múltiplas fotos, use 'multiple' e 'accept=image/*' se desejar restringir a imagens -->
+                <input type="file" name="fotos" id="fotos" multiple accept="image/*">
 
                 <br><br>
                 <button type="submit" class="schedule-visit">Finalizar Vistoria</button>

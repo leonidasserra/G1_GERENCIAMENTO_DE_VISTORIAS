@@ -196,13 +196,14 @@
 <aside class="sidebar">
     <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
     <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
-    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
-    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
     <div class="logout">
         <a href="{{ url_for('views.login') }}">Sair</a>
     </div>
 </aside>
+
 
     <main class="main-content">
         <div class="header">
@@ -211,7 +212,7 @@
 
         <div class="property-card">
             <div class="property-image-container">
-                <img src="{{ url_for('static', filename='images/pexels-binyaminmellish-1396122.jpg') }}" alt="Casa no Calhau" class="property-image">
+                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}" alt="Casa no Calhau" class="property-image">
             </div>
             <div class="property-info-container">
                 <h2>Casa no Calhau</h2>
@@ -244,7 +245,8 @@
         <div class="emissao_relatorio">
             <h3>Emissão de Relatório</h3>
             <br>
-            <p>Data: DD/MM/AAAA</p>
+            <p>Data da Vistoria: {{ session.get('relatorio_vistoria', {}).get('Data da Vistoria', 'Não informada') }}</p>
+
             <p>Proprietário: José Maria Pinheiro</p>
         </div>
     </main>
