@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions - Imóvel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .company-name {
+            color: black;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            bottom: 0;
+            width: 240px;
+            background-color: #e8d5c4;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+
+        .nav-item {
+            margin: 10px 0;
+            color: #8B4513;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-item:hover {
+            opacity: 0.8;
+        }
+
+        .logout {
+            color: #8B4513;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .main-content {
+            margin-left: 240px;
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+        }
+
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item {
+            margin: 10px 0;
+            color: #8B4513;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-item:hover {
+            opacity: 0.8;
+        }
+
+        .user-menu {
+            background: #CD853F;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Added Metrics Styles */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #CD853F;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card h3 {
+            color: black;
+            margin-top: 0;
+            font-size: 1rem;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #CD853F;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: white;
+            border: 2px solid #CD853F;
+            border-radius: 8px;
+            padding: 20px;
+            height: 300px;
+        }
+
+        .chart-title {
+            color: black;
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                top: 60px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 120px;
+                padding: 10px;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .property-image-container {
+                width: 100%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">V</div>
+    </header>
+
+    <aside class="sidebar">
+        <a href="3.menu.html" class="nav-item">Menu</a>
+        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="#" class="nav-item">Configurações</a>
+        <div class="logout">
+            <a href="1.login.html">Sair</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Métricas</h1>
+        </div>
+
+        <!-- Tudo referente às métricas é a partir daqui -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Vistoriadores Cadastrados</h3>
+                <div class="metric-value">24</div>
+            </div>
+            <div class="metric-card">
+                <h3>Imóveis Cadastrados</h3>
+                <div class="metric-value">1,234</div>
+            </div>
+            <div class="metric-card">
+                <h3>Imóveis Desativados</h3>
+                <div class="metric-value">89</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-container">
+                <h2 class="chart-title">Vistorias Concluídas</h2>
+                <canvas id="inspectionsChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2 class="chart-title">Feedback das Vistorias</h2>
+                <canvas id="feedbackChart"></canvas>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+// Vistorias Concluídas Chart
+const inspectionsCtx = document.getElementById('inspectionsChart').getContext('2d');
+new Chart(inspectionsCtx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+            label: 'Vistorias',
+            data: [45, 52, 48, 70, 65, 85],
+            borderColor: '#CD853F',
+            backgroundColor: 'rgba(205, 133, 63, 0.1)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    color: 'black',
+                    font: {
+                        size: 12
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    color: 'black',
+                    font: {
+                        size: 12
+                    }
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                }
+            },
+            x: {
+                ticks: {
+                    color: 'black',
+                    font: {
+                        size: 12
+                    }
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                }
+            }
+        }
+    }
+});
+
+// Feedback das Vistorias Chart
+const feedbackCtx = document.getElementById('feedbackChart').getContext('2d');
+new Chart(feedbackCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Excelente', 'Bom', 'Regular', 'Ruim'],
+        datasets: [{
+            data: [55, 30, 10, 5],
+            backgroundColor: [
+                '#CD853F',
+                'rgba(205, 133, 63, 0.8)',
+                'rgba(205, 133, 63, 0.6)',
+                'rgba(205, 133, 63, 0.4)'
+            ],
+            borderColor: 'white',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    color: 'black',
+                    font: {
+                        size: 12
+                    }
+                }
+            }
+        }
+    }
+});
+    </script>
+</body>
+</html>

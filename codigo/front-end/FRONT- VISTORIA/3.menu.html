@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .company-name {
+            color: black;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            bottom: 0;
+            width: 240px;
+            background-color: #e8d5c4;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+
+        .nav-item {
+            margin: 10px 0;
+            color: #8B4513;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-item:hover {
+            opacity: 0.8;
+        }
+
+        .logout {
+            color: #8B4513;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            opacity: 0.8;
+        }
+
+
+        .main-content {
+            margin-left: 240px;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            color: black;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding-left: 35px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .add-property-btn {
+            background-color: #d4811c;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 15px;
+        }
+
+        .property-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .property-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .view-button {
+            background-color: #d4811c;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 8px;
+            color: #666;
+        }
+
+        .user-menu {
+            background: #CD853F;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 10px;
+                top: 60px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 120px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">V</div>
+    </header>
+
+    <aside class="sidebar">
+        <a href="3.menu.html" class="nav-item">Menu</a>
+        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="#" class="nav-item">Configurações</a>
+        <div class="logout">
+            <a href="1.login.html">Sair</a>
+            
+        </div>
+    </aside>
+
+
+
+    <main class="main-content">
+        <h1 style="font-size: 25px;">Menu</h1>
+        <br>
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="search" class="search-input" placeholder="Pesquisar">
+            </div>
+            <a href="5.adicionarimovel.html"><button class="add-property-btn">Adicionar Imóvel</button></a>
+    
+        </div>
+
+        <div class="property-grid">
+            <div class="property-card">
+                <img src="pexels-binyaminmellish-1396122 (1).jpg" alt="Casa no Calhau" class="property-image">
+                <div class="property-info">
+                    <h3 class="property-title">Casa no Calhau</h3>
+                    <p class="property-description">Apartamento que nanan pepe papapa</p>
+                    <a href="6.imovel.html"><button class="view-button">Ver imóvel</button></a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="vinhais.jpg" alt="Apartamento no Vinhais" class="property-image">
+                <div class="property-info">
+                    <h3 class="property-title">Apartamento no Vinhais</h3>
+                    <p class="property-description">Apartamento que nanan pepe papapa</p>
+                    <button class="view-button">Ver imóvel</button>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="aap.jpg" alt="Apartamento no Renascença" class="property-image">
+                <div class="property-info">
+                    <h3 class="property-title">Apartamento no Renascença</h3>
+                    <p class="property-description">Apartamento que nanan pepe papapa</p>
+                    <button class="view-button">Ver imóvel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <span>◀</span>
+            <span>1, 2, 3, 4...</span>
+            <span>▶</span>
+        </div>
+    </main>
+</body>
+</html>
+
