@@ -172,14 +172,17 @@
         </div>
     </header>
 
-    <aside class="sidebar">
-        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
-        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-        <a href="#" class="nav-item">Configurações</a>
-        <div class="logout">
-            <a href="{{ url_for('views.login') }}">Sair</a>
-        </div>
-    </aside>
+<!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+<aside class="sidebar">
+    <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+    <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
+    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
+    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <div class="logout">
+        <a href="{{ url_for('views.login') }}">Sair</a>
+    </div>
+</aside>
 
     <main class="main-content">
         <div class="header">

@@ -190,14 +190,17 @@
         </div>
     </header>
 
-    <aside class="sidebar">
-        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
-        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
-        <a href="#" class="nav-item">Configurações</a>
-        <div class="logout">
-            <a href="{{ url_for('views.login') }}">Sair</a>
-        </div>
-    </aside>
+<!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+<aside class="sidebar">
+    <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+    <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+    <a href=""{{ url_for('views.vistoriasrealizadas') }}"" class="nav-item">Vistorias Realizadas</a>
+    <a href=""{{ url_for('views.vistoriasagendadas') }}"" class="nav-item">Vistorias Agendadas</a>
+    <a href=""{{ url_for('views.configuracoes') }}"" class="nav-item">Configurações</a>
+    <div class="logout">
+        <a href="{{ url_for('views.login') }}">Sair</a>
+    </div>
+</aside>
 
     <main class="main-content">
         <div class="header">
@@ -211,9 +214,12 @@
             <div class="property-info-container">
                 <h2>Casa no Calhau</h2>
                 <p>São Luis, Maranhão/MA</p>
-                <p><strong>Data da Vistoria:</strong> {{ data_agendada }}</p>
+ <!--             <p><strong>Data da Vistoria:</strong> {{ data_agendada }}</p> -->  
             </div>
             <div class="button-container">
+                <!--AMIGO, BEM AQUI, ASSIM QUE ELE CLICA EM INICIAR VISTORIA, ELE TEM QUE IR PRO 7.2 DESEJA REALIZAR,
+                AI NO BOTÃO SIM, TU VAI PRA VIEWS.VISTORIA, O BOTÃO NÃO, TU VOLTA PRA ESSA MESMA PAGINA-->
+                <!--TB PERCEBI QUE A PORRA DO BOTÃO DE REAGENDAR SUMIU, CASO TU COLOQUE ELE DNV, A MESMA COISA, ELE TEM QUE IR PRO 7.1, AI NO BOTAO SIM, ELE VOLTA PARA 6.IMOVEL E SE NN, ELE VOLTA PRA ESSA MESMA PAGINA-->
                 <a href="{{ url_for('views.vistoria', imovel_id=imovel.id) }}">
                     <button class="schedule-visit">Iniciar Vistoria</button>
                 </a>
