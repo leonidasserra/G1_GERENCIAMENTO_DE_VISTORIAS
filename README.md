@@ -8,7 +8,7 @@ Reconhecimentos e Direitos Autorais
 
 @versão: 1.0
 
-@outros repositórios: []
+@outros repositórios: [https://github.com/Su6eate9/gerenciamento-vistoria-imoveis]
 
 @Agradecimentos: Universidade Federal do Maranhão (UFMA), Professor Doutor Thales Levi Azevedo Valente, e colegas de curso.
 
