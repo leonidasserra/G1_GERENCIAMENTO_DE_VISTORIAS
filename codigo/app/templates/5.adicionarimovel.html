@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVanguard Solutions - Imóvel</title>
+    <title>TechVanguard Solutions - Adicionar Imóvel</title>
     <style>
         * {
             margin: 0;
@@ -145,7 +145,6 @@
             color: rgba(0, 0, 0, 0.5);
         }
 
-
         .schedule-visit {
             background-color: white;
             color: #8B4513;
@@ -179,44 +178,6 @@
         .overview-card input:focus,
         .location-card input:focus {
             border-bottom: 2px solid #CD853F;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-item {
-            margin: 10px 0;
-            color: #8B4513;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-        }
-
-        .nav-item:hover {
-            opacity: 0.8;
-        }
-
-        .user-menu {
-            background: #CD853F;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -264,30 +225,23 @@
             .location-card {
                 padding: 15px;
             }
-
-            .features {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .header h1 {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
 <body>
     <header class="top-header">
         <div class="company-name">TechVanguard Solutions</div>
-        <div class="user-menu">V</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
     </header>
 
     <aside class="sidebar">
-        <a href="3.menu.html" class="nav-item">Menu</a>
-        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
         <a href="#" class="nav-item">Configurações</a>
         <div class="logout">
-            <a href="1.login.html">Sair</a>
+            <a href="{{ url_for('views.login') }}">Sair</a>
         </div>
     </aside>
 
@@ -296,34 +250,18 @@
             <h1>Novo Imóvel</h1>
         </div>
 
-        <div class="property-card">
-            <div class="property-image-container">
-                <a href="#"><img src="istockphoto-1159947597-612x612.jpg" alt="Adicionar Imagem" class="property-image"></a>
-                
+        <form method="POST" action="{{ url_for('views.adicionar_imovel') }}">
+            <div class="property-card">
+                <div class="property-image-container">
+                    <a href="#"><img src="{{ url_for('static', filename='images/istockphoto-1159947597-612x612.jpg') }}" alt="Adicionar Imagem" class="property-image"></a>
+                </div>
+                <div class="property-info-container">
+                    <input type="text" class="input-style" name="nome_imovel" placeholder="Nome do Imóvel" required>
+                    <input type="text" class="input-style" name="local" placeholder="Local" required>
+                    <button type="submit" class="schedule-visit">Adicionar</button>
+                </div>
             </div>
-            <div class="property-info-container">
-                <input type="text" class="input-style" placeholder="Nome do Imóvel">
-                <input type="text" class="input-style" placeholder="Local">
-                <a href="3.menu.html"><button class="schedule-visit">Adicionar</button></a>
-            </div>
-        </div>
-
-        <div class="content-grid">
-            <div class="overview-card">
-                <h3>Visão Geral</h3>
-                <br>
-                <input type="text" class="editable-input" placeholder="Descrição Geral">
-            </div>
-
-            <div class="location-card">
-                <h3>Localização</h3>
-                <br>
-                <input type="text" class="editable-input" placeholder="Endereço">
-                <input type="text" class="editable-input" placeholder="Bairro">
-                <input type="text" class="editable-input" placeholder="Cidade">
-                <input type="text" class="editable-input" placeholder="CEP">
-            </div>
-        </div>
+        </form>
     </main>
 </body>
 </html>

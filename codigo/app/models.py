@@ -1,6 +1,5 @@
 from database import db
-
-from database import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Funcionario(db.Model):
     __tablename__ = 'funcionarios'
@@ -9,8 +8,16 @@ class Funcionario(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     telefone = db.Column(db.String(15), nullable=True)
-    senha = db.Column(db.String(200), nullable=False)
+    senha_hash = db.Column(db.String(200), nullable=False)
     cnpj = db.Column(db.String(18), unique=True, nullable=False)  # Obrigatório para imobiliárias
+
+    def set_password(self, senha):
+        """Criptografa a senha antes de armazenar no banco de dados."""
+        self.senha_hash = generate_password_hash(senha)
+
+    def check_password(self, senha):
+        """Verifica se a senha inserida corresponde ao hash armazenado."""
+        return check_password_hash(self.senha_hash, senha)
 
     def to_dict(self):
         return {
@@ -20,7 +27,6 @@ class Funcionario(db.Model):
             "telefone": self.telefone,
             "cnpj": self.cnpj
         }
-
 
 
 # Tabela de Imóveis

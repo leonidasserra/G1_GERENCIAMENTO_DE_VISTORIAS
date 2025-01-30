@@ -44,7 +44,6 @@
             padding: 20px;
         }
 
-
         .nav-item {
             margin: 10px 0;
             color: #8B4513;
@@ -70,24 +69,10 @@
             opacity: 0.8;
         }
 
-
         .main-content {
             margin-left: 240px;
             padding: 20px;
             margin-top: 60px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .company-name {
-            color: black;
-            font-weight: 600;
-            font-size: 20px;
         }
 
         .search-container {
@@ -224,27 +209,25 @@
                 padding: 10px;
             }
         }
-        
     </style>
 </head>
 <body>
 
     <header class="top-header">
         <div class="company-name">TechVanguard Solutions</div>
-        <div class="user-menu">V</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
     </header>
 
     <aside class="sidebar">
-        <a href="3.menu.html" class="nav-item">Menu</a>
-        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
         <a href="#" class="nav-item">Configurações</a>
         <div class="logout">
-            <a href="1.login.html">Sair</a>
-            
+            <a href="{{ url_for('views.login') }}">Sair</a>
         </div>
     </aside>
-
-
 
     <main class="main-content">
         <h1 style="font-size: 25px;">Menu</h1>
@@ -254,37 +237,22 @@
                 <span class="search-icon">🔍</span>
                 <input type="search" class="search-input" placeholder="Pesquisar">
             </div>
-            <a href="5.adicionarimovel.html"><button class="add-property-btn">Adicionar Imóvel</button></a>
-    
+            <a href="{{ url_for('views.adicionar_imovel') }}"><button class="add-property-btn">Adicionar Imóvel</button></a>
         </div>
 
         <div class="property-grid">
-            <div class="property-card">
-                <img src="pexels-binyaminmellish-1396122 (1).jpg" alt="Casa no Calhau" class="property-image">
-                <div class="property-info">
-                    <h3 class="property-title">Casa no Calhau</h3>
-                    <p class="property-description">Apartamento que nanan pepe papapa</p>
-                    <a href="6.imovel.html"><button class="view-button">Ver imóvel</button></a>
+            {% for imovel in imoveis %}
+                <div class="property-card">
+                    <img src="{{ url_for('static', filename=imovel['imagem']) }}" alt="{{ imovel['nome'] }}" class="property-image">
+                    <div class="property-info">
+                        <h3 class="property-title">{{ imovel['nome'] }}</h3>
+                        <p class="property-description">Clique para ver mais detalhes</p>
+                        <a href="{{ url_for('views.imovel', imovel_id=imovel['id']) }}">
+                            <button class="view-button">Ver imóvel</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="property-card">
-                <img src="vinhais.jpg" alt="Apartamento no Vinhais" class="property-image">
-                <div class="property-info">
-                    <h3 class="property-title">Apartamento no Vinhais</h3>
-                    <p class="property-description">Apartamento que nanan pepe papapa</p>
-                    <button class="view-button">Ver imóvel</button>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="aap.jpg" alt="Apartamento no Renascença" class="property-image">
-                <div class="property-info">
-                    <h3 class="property-title">Apartamento no Renascença</h3>
-                    <p class="property-description">Apartamento que nanan pepe papapa</p>
-                    <button class="view-button">Ver imóvel</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="pagination">
@@ -295,4 +263,3 @@
     </main>
 </body>
 </html>
-

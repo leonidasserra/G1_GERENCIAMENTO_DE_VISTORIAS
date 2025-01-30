@@ -4,7 +4,7 @@ from models import Funcionario
 
 app = create_app()
 with app.app_context():
-    Funcionario.query.filter(Funcionario.senha == "senha123").delete()
+    Funcionario.query.filter(Funcionario.senha_hash == "123").delete()
     db.session.commit()
     print("Usuários com senha em texto puro foram removidos.")
 

@@ -1,60 +1,53 @@
 from flask import Flask
+from flask_session import Session
 from dotenv import load_dotenv
 import os
-from flask_swagger_ui import get_swaggerui_blueprint
+from flask import Flask, redirect, url_for, session, request
 from extensions import mail
 from database import db, init_db
+from routes.views_routes import views_bp
+from routes.auth_routes import auth_bp
+from routes.funcionario_routes import funcionario_bp
+from routes.imobiliaria_routes import imobiliaria_bp
+from routes.vistoriador_routes import vistoriador_bp
+from routes.dashboard_routes import dashboard_bp
 
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
 def create_app():
-    # Inicializar o Flask
     app = Flask(__name__)
 
-    # Configuração do banco de dados
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
-        'DATABASE_URL',
-        f"sqlite:///{os.path.join(basedir, 'prototipo1.db')}"  # Padrão para desenvolvimento
-    )
+    # Configuração do banco de dados e Flask-Mail
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///prototipo1.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    # Configuração do Flask-Mail
-    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
-    app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True').lower() in ['true', '1']
-    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-    app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-
-    # Inicializar extensões
+    app.config['DEBUG'] = os.getenv('DEBUG', 'True').lower() in ['true', '1']
+    app.config['SECRET_KEY'] = 'chave_super_segura'  # Define manualmente uma chave segura
+    
     mail.init_app(app)
     init_db(app)
-
+    '''
     # Registrar Blueprints
-    from routes.funcionario_routes import funcionario_bp
-    from routes.imobiliaria_routes import imobiliaria_bp
-    from routes.vistoriador_routes import vistoriador_bp
-    from routes.dashboard_routes import dashboard_bp
-    from routes.auth_routes import auth_bp
-
+    app.register_blueprint(auth_bp)
     app.register_blueprint(funcionario_bp)
     app.register_blueprint(imobiliaria_bp)
     app.register_blueprint(vistoriador_bp)
     app.register_blueprint(dashboard_bp)
-    app.register_blueprint(auth_bp)
+    '''
+    app.register_blueprint(views_bp)  # Registrando a rota das páginas HTML
 
-    # Configuração do Swagger
-    SWAGGER_URL = '/docs'
-    API_URL = '/static/swagger.json'
-    swagger_bp = get_swaggerui_blueprint(SWAGGER_URL, API_URL)
-    app.register_blueprint(swagger_bp, url_prefix=SWAGGER_URL)
+    # Configuração do Swagger (Somente no modo debug)
+    
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_PERMANENT'] = False
+    app.config['SESSION_USE_SIGNER'] = True
+    app.config['SECRET_KEY'] = 'chave_super_segura'
+    Session(app)
 
     return app
-
 
 if __name__ == '__main__':
     app = create_app()
     app.run(debug=True)
+    

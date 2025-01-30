@@ -48,7 +48,6 @@
             padding: 20px;
         }
 
-
         .nav-item {
             margin: 10px 0;
             color: #8B4513;
@@ -78,13 +77,6 @@
             margin-left: 240px;
             margin-top: 60px;
             padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
         }
 
         .header h1 {
@@ -130,7 +122,6 @@
             font-weight: 600;
         }
 
-
         .content-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -145,47 +136,8 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-item {
-            margin: 10px 0;
-            color: #8B4513;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-        }
-
-        .nav-item:hover {
-            opacity: 0.8;
-        }
-
-        .user-menu {
-            background: #CD853F;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
-                position: relative;
                 width: 100%;
                 top: 60px;
                 height: auto;
@@ -212,71 +164,61 @@
             .content-grid {
                 grid-template-columns: 1fr;
             }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .top-header {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
     <header class="top-header">
         <div class="company-name">TechVanguard Solutions</div>
-        <div class="user-menu">V</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
     </header>
 
     <aside class="sidebar">
-        <a href="3.menu.html" class="nav-item">Menu</a>
-        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
         <a href="#" class="nav-item">Configurações</a>
         <div class="logout">
-            <a href="1.login.html">Sair</a>
-            
+            <a href="{{ url_for('views.login') }}">Sair</a>
         </div>
     </aside>
 
     <main class="main-content">
         <div class="header">
-            <h1>Imóvel</h1>
+            <h1>{{ imovel['nome'] }}</h1>
         </div>
 
         <div class="property-card">
             <div class="property-image-container">
-                <img src="pexels-binyaminmellish-1396122 (1).jpg" alt="Casa no Calhau" class="property-image">
+                <img src="{{ url_for('static', filename=imovel['imagem']) }}" alt="{{ imovel['nome'] }}" class="property-image">
             </div>
             <div class="property-info-container">
-                <h2>Casa no Calhau</h2>
-                <p>São Luis, Maranhão/MA</p>
-                    <input type="date" class="schedule-visit" placeholder="Data do Agendamento">
-                    <a href="7.posagendamento.html"><button class="schedule-visit">Agendar Vistoria</button></a>
-                
+                <h2>{{ imovel['nome'] }}</h2>
+                <p>{{ imovel['endereco'] }}</p>
+                <p>{{ imovel['descricao'] }}</p>
+
+                <!-- ✅ Corrigido o formulário para redirecionar para pós-agendamento -->
+                <form method="POST" action="{{ url_for('views.pos_agendamento') }}">
+                    <input type="hidden" name="imovel_id" value="{{ imovel['id'] }}">
+                    <label for="data_vistoria">Selecione uma data:</label>
+                    <input type="date" name="data_vistoria" required>
+                    <button type="submit" class="schedule-visit">Agendar Vistoria</button>
+                </form>
             </div>
         </div>
 
         <div class="content-grid">
             <div class="overview-card">
                 <h3>Visão Geral</h3>
-                <br>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eos nostrum fugit, cum, autem ipsa sapiente labore et quibusdam quisquam minima pariatur sunt laborum numquam inventore, sed debitis. Quae, ipsam?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci fugit placeat voluptatum id. Blanditiis eligendi ad aliquam necessitatibus dicta laborum obcaecati quia, eius quo. Assumenda cum corporis hic fugiat optio.</p>
+                <p>{{ imovel['descricao'] }}</p>
             </div>
 
             <div class="location-card">
                 <h3>Localização</h3>
-                <br>
-                <p>Endereço: Rua dos Flamingos, 354</p>
-                <p>Bairro: Calhau</p>
-                <p>Cidade: São Luis-MA</p>
-                <p>CEP: 625-854</p>
+                <p>Endereço: {{ imovel['endereco'] }}</p>
             </div>
         </div>
     </main>
 </body>
 </html>
-

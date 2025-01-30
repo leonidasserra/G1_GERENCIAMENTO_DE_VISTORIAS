@@ -1,3 +1,4 @@
+'''
 import psycopg2
 
 try:
@@ -12,3 +13,16 @@ try:
     conn.close()
 except Exception as e:
     print(f"Erro ao conectar ao banco: {e}")
+
+from app import create_app
+from database import db
+from models import Funcionario
+
+app = create_app()  # Cria a aplicação Flask
+
+with app.app_context():  # Garante que estamos dentro do contexto da aplicação
+    usuarios = Funcionario.query.all()
+
+    for user in usuarios:
+        print(f"ID: {user.id}, Nome: {user.nome}, CNPJ: {user.cnpj}, Senha Hash: {user.senha_hash}")
+'''

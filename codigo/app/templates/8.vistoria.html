@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVanguard Solutions - Imóvel</title>
+    <title>TechVanguard Solutions - Vistoria</title>
     <style>
         * {
             margin: 0;
@@ -47,7 +47,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-
 
         .nav-item {
             margin: 10px 0;
@@ -129,15 +128,13 @@
             width: 100%;
             cursor: text;
             text-align: left;
-            color: black; /* Para ficar visível */
-            /*border-bottom: 1px solid #ccc;  Adiciona um traço inferior para destacar o input */
-}
-        
+            color: black;
+        }
 
         .input-style::placeholder {
-            color: rgba(0, 0, 0, 0.5); /* Agora o placeholder é cinza escuro */
+            color: rgba(0, 0, 0, 0.5);
             font-size: 15px;
-}
+        }
 
         .schedule-visit {
             background-color: white;
@@ -149,13 +146,12 @@
             font-weight: 600;
         }
 
-         .button-container {
-        margin-left: auto; /* Move os botões para a direita */
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-         }
-
+        .button-container {
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
         .vistoria {
             background: white;
@@ -164,52 +160,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             gap: 25px;
             margin-top: 20px;
-        }
-
-        .button-container {
-        margin-left: auto; /* Move os botões para a direita */
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-         }
-
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-item {
-            margin: 10px 0;
-            color: #8B4513;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-        }
-
-        .nav-item:hover {
-            opacity: 0.8;
-        }
-
-        .user-menu {
-            background: #CD853F;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -241,33 +191,23 @@
             .content-grid {
                 grid-template-columns: 1fr;
             }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .top-header {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
     <header class="top-header">
         <div class="company-name">TechVanguard Solutions</div>
-        <div class="user-menu">V</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
     </header>
 
     <aside class="sidebar">
-        <a href="3.menu.html" class="nav-item">Menu</a>
-        <a href="4.metricas.html" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
         <a href="#" class="nav-item">Configurações</a>
         <div class="logout">
-            <a href="1.login.html">Sair</a>
-            
+            <a href="{{ url_for('views.login') }}">Sair</a>
         </div>
     </aside>
 
@@ -278,36 +218,40 @@
 
         <div class="property-card">
             <div class="property-image-container">
-                <img src="pexels-binyaminmellish-1396122 (1).jpg" alt="Casa no Calhau" class="property-image">
+                <img src="{{ url_for('static', filename='images/pexels-binyaminmellish-1396122.jpg') }}" alt="Casa no Calhau" class="property-image">
             </div>
             <div class="property-info-container">
                 <h2>Casa no Calhau</h2>
                 <p>São Luis, Maranhão/MA</p>
-            </div>
-            <div class="button-container">
-                <a href="9.vistoria_finalizada.html"><button class="schedule-visit">Finalizar Vistoria</button></a>
-               
+                <p><strong>Data Agendada:</strong> {{ data_agendamento }}</p>
             </div>
         </div>
 
         <br>
         <h1 style="font-size: 20px;">Informações Sobre a Vistoria</h1>
         
-        <div class="vistoria">
-            <h3>Título</h3>
-            <br>
-            <textarea class="input-style" placeholder="Nome do Imóvel"></textarea>
-            <h3>Descrição</h3>
-            <br>
-            <textarea class="input-style" placeholder="Descrição da Situação do Imóvel"></textarea>
-            <h3>Observações Importantes</h3>
-            <br>
-            <textarea class="input-style" placeholder="Observações"></textarea>
-            <h3>Anexar Fotos</h3>
-            <br>
-            <input style="size: 10px;" type="file"  placeholder="Fotos Vistoria">
-            
-        </div>
+        <form action="{{ url_for('views.vistoria_finalizada') }}" method="POST" enctype="multipart/form-data">
+            <div class="vistoria">
+                <h3>Título</h3>
+                <br>
+                <input type="text" class="input-style" name="titulo" id="titulo" placeholder="Título da Vistoria" required>
+
+                <h3>Descrição</h3>
+                <br>
+                <textarea class="input-style" name="descricao" id="descricao" placeholder="Descrição da Situação do Imóvel" required></textarea>
+
+                <h3>Observações Importantes</h3>
+                <br>
+                <textarea class="input-style" name="observacoes" id="observacoes" placeholder="Observações"></textarea>
+
+                <h3>Anexar Fotos</h3>
+                <br>
+                <input type="file" name="fotos" multiple>
+
+                <br><br>
+                <button type="submit" class="schedule-visit">Finalizar Vistoria</button>
+            </div>
+        </form>
     </main>
 </body>
 </html>
