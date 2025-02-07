@@ -346,15 +346,9 @@
             <div class="modal">
                 <h2>Deseja realmente iniciar a vistoria?</h2>
                 <div class="modal-buttons">
-                    <!-- Botão "Sim" leva para a realização da vistoria -->
-                    <a href="{{ url_for('views.vistoria', imovel_id=request.args.get('imovel_id')) }}">
-                        <button class="btn">Sim</button>
-                    </a>
-                    
-                    <!-- Botão "Não" volta para a tela de pós-agendamento -->
-                    <a href="{{ url_for('views.pos_agendamento') }}">
-                        <button class="btn">Não</button>
-                    </a>
+                    <a href="{{ url_for('views.vistoria', imovel_id=imovel_id) }}"><button class="btn">Sim</button></a>
+                    <a href="{{ url_for('views.pos_agendamento') }}"><button class="btn">Não</button></a>
+
                 </div>
             </div>
         </div>

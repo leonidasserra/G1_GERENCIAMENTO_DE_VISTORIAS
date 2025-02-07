@@ -345,10 +345,9 @@
             <div class="modal">
                 <h2>Deseja reagendar a vistoria?</h2>
                 <div class="modal-buttons">
-                    <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 6. IMOVEL-->
-                    <a href="#"><button class="btn">Sim</button></a>
-                    <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 7. POSAGENDAMENTO-->
-                    <a href="#"><button class="btn">Não</button></a>
+                    <a href="{{ url_for('views.imovel', imovel_id=imovel_id) }}"><button class="btn">Sim</button></a>
+                    <a href="{{ url_for('views.pos_agendamento') }}"><button class="btn">Não</button></a>
+
                 </div>
             </div>
         </div>

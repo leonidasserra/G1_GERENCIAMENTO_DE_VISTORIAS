@@ -67,7 +67,9 @@
     <div class="modal">
         <h2>Deseja realmente desativar este imóvel?</h2>
         <div class="modal-buttons">
-            <a href="#"><button class="btn btn-confirm">Sim</button></a>
+            <form action="{{ url_for('views.desativar_imovel', imovel_id=imovel['id']) }}" method="POST">
+                <button type="submit" class="btn btn-confirm">Sim</button>
+            </form>            
             <a href="{{ url_for('views.configuracoes') }}"><button class="btn btn-cancel">Não</button></a>
         </div>
     </div>

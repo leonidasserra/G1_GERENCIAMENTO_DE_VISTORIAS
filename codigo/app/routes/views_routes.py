@@ -1,14 +1,23 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, make_response
 from models import Funcionario
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
-from flask import Response, make_response
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
 import os
 
 views_bp = Blueprint('views', __name__)
+
+# 🔹 Banco de Dados Simulado (Dicionário Global)
+db_simulado = {
+    "imoveis": {
+        1: {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg",
+            "endereco": "Rua dos Flamingos, 354", "descricao": "Casa espaçosa com 3 quartos e vista para o mar."},
+        2: {"id": 2, "nome": "Apartamento no Vinhais", "imagem": "images/apartamento-vinhais.jpg",
+            "endereco": "Avenida Central, 200", "descricao": "Apartamento moderno com excelente infraestrutura."}
+    }
+}
 
 # 🔹 Rota de Login
 @views_bp.route('/')
@@ -29,11 +38,7 @@ def cadastro():
 # 🔹 Rota do Menu Principal
 @views_bp.route('/menu')
 def menu():
-    imoveis = [
-        {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg"},
-        {"id": 2, "nome": "Apartamento no Vinhais", "imagem": "images/apartamento-vinhais.jpg"}
-    ]
-    return render_template('3.menu.html', imoveis=imoveis)
+    return render_template('3.menu.html', imoveis=db_simulado["imoveis"].values())
 
 # 🔹 Rota de Métricas
 @views_bp.route('/metricas')
@@ -44,21 +49,31 @@ def metricas():
 @views_bp.route('/adicionar_imovel', methods=['GET', 'POST'])
 def adicionar_imovel():
     if request.method == 'POST':
-        flash('Imóvel cadastrado com sucesso!')
+        novo_id = max(db_simulado["imoveis"].keys(), default=0) + 1
+        nome = request.form.get("nome_imovel")
+        endereco = request.form.get("local")
+
+        if not nome or not endereco:
+            flash("Nome e endereço são obrigatórios!", "danger")
+            return redirect(url_for("views.adicionar_imovel"))
+
+        db_simulado["imoveis"][novo_id] = {
+            "id": novo_id,
+            "nome": nome,
+            "imagem": "images/default.jpg",
+            "endereco": endereco,
+            "descricao": "Imóvel recém-adicionado."
+        }
+
+        flash("Imóvel cadastrado com sucesso!", "success")
         return redirect(url_for('views.menu'))
+
     return render_template('5.adicionarimovel.html')
 
 # 🔹 Rota de Imóvel (com ID dinâmico)
 @views_bp.route('/imovel/<int:imovel_id>', methods=['GET'])
 def imovel(imovel_id):
-    imoveis = {
-        1: {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg",
-            "endereco": "Rua dos Flamingos, 354", "descricao": "Casa espaçosa com 3 quartos e vista para o mar."},
-        2: {"id": 2, "nome": "Apartamento no Vinhais", "imagem": "images/apartamento-vinhais.jpg",
-            "endereco": "Avenida Central, 200", "descricao": "Apartamento moderno com excelente infraestrutura."}
-    }
-
-    imovel = imoveis.get(imovel_id)
+    imovel = db_simulado["imoveis"].get(imovel_id)
     if not imovel:
         flash("Imóvel não encontrado.", "danger")
         return redirect(url_for("views.menu"))
@@ -68,9 +83,6 @@ def imovel(imovel_id):
 # 🔹 Rota de Pós-Agendamento
 @views_bp.route('/pos_agendamento', methods=['POST', 'GET'])
 def pos_agendamento():
-    """Exibe a tela de pós-agendamento após o agendamento da vistoria."""
-    
-    # Captura os dados do formulário enviados pelo usuário
     imovel_id = request.form.get("imovel_id")
     data_vistoria = request.form.get("data_vistoria")
 
@@ -78,134 +90,43 @@ def pos_agendamento():
         flash("Erro: Imóvel ou data não selecionados.", "danger")
         return redirect(url_for("views.menu"))
 
-    # Simulação do banco de dados de imóveis
-    imoveis = {
-        "1": {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg",
-              "endereco": "Rua dos Flamingos, 354", "descricao": "Casa espaçosa com 3 quartos e vista para o mar."},
-        "2": {"id": 2, "nome": "Apartamento no Vinhais", "imagem": "images/apartamento-vinhais.jpg",
-              "endereco": "Avenida Central, 200", "descricao": "Apartamento moderno com excelente infraestrutura."}
-    }
-
-    imovel = imoveis.get(imovel_id)
+    imovel = db_simulado["imoveis"].get(int(imovel_id))
     if not imovel:
         flash("Erro: Imóvel não encontrado.", "danger")
         return redirect(url_for("views.menu"))
 
-    # Salvar os dados na sessão para serem usados na próxima página
     session["imovel"] = imovel
     session["data_vistoria"] = data_vistoria
 
     return render_template('7.posagendamento.html', imovel=imovel, data_vistoria=data_vistoria)
 
-
-# 🔹 Rota para Iniciar a Vistoria
-@views_bp.route('/vistoria/<int:imovel_id>', methods=['GET', 'POST'])
-def vistoria(imovel_id):
-    """Exibe a tela de vistoria do imóvel selecionado após o agendamento."""
-    
-    # Captura a data da vistoria da sessão
-    data_vistoria = session.get("data_vistoria", "Não informada")
-
-    # Recupera os dados do imóvel da sessão
-    imovel = session.get("imovel", {})
-
-    if not imovel or imovel.get("id") != imovel_id:
-        flash("Erro: Nenhum imóvel selecionado ou ID inválido.", "danger")
-        return redirect(url_for("views.menu"))
-
-    return render_template("8.vistoria.html", imovel=imovel, data_vistoria=data_vistoria)
-
-
-# 🔹 Rota para Finalizar a Vistoria
-import os
-from werkzeug.utils import secure_filename
-
-@views_bp.route('/vistoria_finalizada', methods=['POST'])
-def vistoria_finalizada():
-    """Finaliza a vistoria e armazena os dados preenchidos na sessão."""
-
-    titulo = request.form.get("titulo")
-    descricao = request.form.get("descricao")
-    observacoes = request.form.get("observacoes")
-    fotos = request.files.getlist("fotos")
-
-    if not titulo or not descricao:
-        flash("Erro: O título e a descrição são obrigatórios!", "danger")
-        return redirect(url_for("views.vistoria", imovel_id=session.get("imovel", {}).get("id")))
-
-    # Criar pasta de uploads se não existir
-    upload_folder = "static/uploads"
-    if not os.path.exists(upload_folder):
-        os.makedirs(upload_folder)
-
-    # Salvar informações na sessão
-    session["relatorio_vistoria"] = {
-        "Nome do Imóvel": session.get("imovel", {}).get("nome", "Não informado"),
-        "Data da Vistoria": session.get("data_vistoria", "Não informada"),
-        "Endereço": session.get("imovel", {}).get("endereco", "Não informado"),
-        "Título": titulo,
-        "Descrição": descricao,
-        "Observações": observacoes,
-        "Fotos": [],
-    }
-
-    # Salvando imagens corretamente
-    for foto in fotos:
-        if foto and foto.filename != "":
-            from werkzeug.utils import secure_filename
-            filename = secure_filename(foto.filename)
-            caminho_foto = os.path.join(upload_folder, filename)
-            foto.save(caminho_foto)
-            session["relatorio_vistoria"]["Fotos"].append(caminho_foto)
-
-    return redirect(url_for("views.vistoria_finalizada_template"))
-
-
-
-@views_bp.route('/vistoria_finalizada_template')
-def vistoria_finalizada_template():
-    """Renderiza a página de vistoria finalizada"""
-    return render_template('9.vistoria_finalizada.html')
-
-
-# 🔹 Relatórios e Configurações
-@views_bp.route('/vistoriasrealizadas')
+# 🔹 Rota para Exibir Vistorias Realizadas
+@views_bp.route('/vistorias_realizadas')
 def vistorias_realizadas():
     return render_template('10.vistoriasrealizadas.html')
 
-@views_bp.route('/vistoriasagendadas')
+# 🔹 Rota para Exibir Vistorias Agendadas
+@views_bp.route('/vistorias_agendadas')
 def vistorias_agendadas():
     return render_template('11.vistoriasagendadas.html')
 
+# 🔹 Rota para Exibir Configurações
 @views_bp.route('/configuracoes')
 def configuracoes():
     return render_template('12.configuracoes.html')
 
-@views_bp.route('/editarcadastro')
+# 🔹 Rota para Editar Cadastro
+@views_bp.route('/editar_cadastro')
 def editar_cadastro():
     return render_template('13.editarcadastro.html')
 
-@views_bp.route('/editarimovel/<int:imovel_id>', methods=['GET'])
+# 🔹 Rota para Editar Imóvel
+@views_bp.route('/editar_imovel/<int:imovel_id>')
 def editar_imovel(imovel_id):
-    """Carrega os dados do imóvel para edição."""
-
-    # Simulação de um banco de dados de imóveis
-    imoveis = {
-        1: {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg",
-            "endereco": "Rua dos Flamingos, 354", "descricao": "Casa espaçosa com 3 quartos."},
-        2: {"id": 2, "nome": "Apartamento no Vinhais", "imagem": "images/apartamento-vinhais.jpg",
-            "endereco": "Avenida Central, 200", "descricao": "Apartamento moderno e bem localizado."}
-    }
-
-    # Busca o imóvel pelo ID
-    imovel = imoveis.get(imovel_id)
-
-    # Se o imóvel não existir, redireciona para o menu com um alerta
+    imovel = db_simulado["imoveis"].get(imovel_id)
     if not imovel:
-        flash("Erro: Imóvel não encontrado.", "danger")
+        flash("Imóvel não encontrado.", "danger")
         return redirect(url_for("views.menu"))
-
-    # Renderiza a página com os dados do imóvel
     return render_template('14.editarimovel.html', imovel=imovel)
 
 

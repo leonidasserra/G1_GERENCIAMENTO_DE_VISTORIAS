@@ -368,10 +368,9 @@
                     <div class="modal">
                         <h2>Deseja finalizar a vistoria?</h2>
                         <div class="modal-buttons">
-                            <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 9.VISTORIA FINALIZADA-->
-                            <a href="#"><button class="btn">Sim</button></a>
-                            <!--LEONIDAS, NESSE HREF TU PRECISA COLOCAR A URL DE 8.VISTORIA -->
-                            <a href="#"><button class="btn">Não</button></a>
+                            <a href="{{ url_for('views.vistoria_finalizada') }}"><button class="btn">Sim</button></a>
+                            <a href="{{ url_for('views.vistoria', imovel_id=session.get('imovel', {}).get('id')) }}"><button class="btn">Não</button></a>
+
                         </div>
                     </div>
                 </div>
