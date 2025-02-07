@@ -5,7 +5,7 @@ import os
 from flask import Flask, redirect, url_for, session, request
 from extensions import mail
 from database import db, init_db
-from routes.views_routes import views_bp
+from routes.views_routes_prototipo import views_bp
 from routes.auth_routes import auth_bp
 from routes.funcionario_routes import funcionario_bp
 from routes.imobiliaria_routes import imobiliaria_bp

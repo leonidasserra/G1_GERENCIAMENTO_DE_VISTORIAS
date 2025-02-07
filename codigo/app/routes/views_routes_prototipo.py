@@ -9,7 +9,7 @@ import os
 
 views_bp = Blueprint('views', __name__)
 
-# 🔹 Banco de Dados Simulado (Dicionário Global)
+# 🔹 Banco de Dados Simulado
 db_simulado = {
     "imoveis": {
         1: {"id": 1, "nome": "Casa no Calhau", "imagem": "images/casa-calhau.jpg",
