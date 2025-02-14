@@ -207,40 +207,37 @@
         <div class="header">
             <h1>Vistoria Agendada</h1>
         </div>
-
+    
         <div class="property-card">
             <div class="property-image-container">
-                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}" alt="Casa no Calhau" class="property-image">
+                <img src="{{ session['imovel_imagem'] }}" alt="{{ session['imovel_nome'] }}" class="property-image">
             </div>
             <div class="property-info-container">
-                <h2>Casa no Calhau</h2>
-                <p>São Luis, Maranhão/MA</p>
- <!--             <p><strong>Data da Vistoria:</strong> {{ data_agendada }}</p> -->  
+                <h2>{{ session['imovel_nome'] }}</h2>
+                <p>{{ session['imovel_endereco'] }}</p>
+                <p><strong>Data da Vistoria:</strong> {{ session['data_vistoria'] }}</p>
             </div>
             <div class="button-container">
-                <!--AMIGO, BEM AQUI, ASSIM QUE ELE CLICA EM INICIAR VISTORIA, ELE TEM QUE IR PRO 7.2 DESEJA REALIZAR,
-                AI NO BOTÃO SIM, TU VAI PRA VIEWS.VISTORIA, O BOTÃO NÃO, TU VOLTA PRA ESSA MESMA PAGINA-->
-                <!--TB PERCEBI QUE A PORRA DO BOTÃO DE REAGENDAR SUMIU, CASO TU COLOQUE ELE DNV, A MESMA COISA, ELE TEM QUE IR PRO 7.1, AI NO BOTAO SIM, ELE VOLTA PARA 6.IMOVEL E SE NN, ELE VOLTA PRA ESSA MESMA PAGINA-->
-                <a href="{{ url_for('views.deseja_realizar', imovel_id=imovel['id']) }}">
+                <a href="{{ url_for('views.deseja_realizar', imovel_id=session['imovel_id']) }}">
                     <button class="schedule-visit">Realizar Vistoria</button>
-                </a>               
+                </a>
+                <a href="{{ url_for('views.deseja_reagendar', imovel_id=session['imovel_id']) }}">
+                    <button class="reschedule-visit">Reagendar Vistoria</button>
+                </a>
             </div>
         </div>
-
+    
         <div class="content-grid">
             <div class="overview-card">
                 <h3>Visão Geral</h3>
                 <br>
                 <p>Confirme os detalhes da vistoria antes de iniciar.</p>
             </div>
-
+    
             <div class="location-card">
                 <h3>Localização</h3>
                 <br>
-                <p>Endereço: Rua dos Flamingos, 354</p>
-                <p>Bairro: Calhau</p>
-                <p>Cidade: São Luis-MA</p>
-                <p>CEP: 625-854</p>
+                <p>Endereço: {{ session['imovel_endereco'] }}</p>
             </div>
         </div>
     </main>
