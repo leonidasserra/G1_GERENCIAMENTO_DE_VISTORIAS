@@ -6,210 +6,150 @@
     <title>TechVanguard Solutions</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+        *         
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+    margin-top: 60px;
+}
 
-        .top-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background-color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-        .company-name {
-            color: black;
-            font-weight: 600;
-            font-size: 20px;
-        }
+.company-name {
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+}
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 60px;
-            bottom: 0;
-            width: 240px;
-            background-color: #e8d5c4;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
 
-        .nav-item {
-            margin: 10px 0;
-            color: #8B4513;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-        }
+.search-box {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+}
 
-        .nav-item:hover {
-            opacity: 0.8;
-        }
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-left: 35px;
+}
 
-        .logout {
-            color: #8B4513;
-            position: absolute;
-            bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-            opacity: 0.8;
-        }
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
 
-        .main-content {
-            margin-left: 240px;
-            padding: 20px;
-            margin-top: 60px;
-        }
+.add-property-btn {
+    background-color: #d4811c;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        .search-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            gap: 20px;
-        }
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 
-        .search-box {
-            flex: 1;
-            max-width: 400px;
-            position: relative;
-        }
+.property-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-        .search-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding-left: 35px;
-        }
+.property-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
 
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-        }
+.property-info {
+    padding: 15px;
+}
 
-        .add-property-btn {
-            background-color: #d4811c;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+.property-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
 
-        .property-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+.property-description {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
 
-        .property-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+.view-button {
+    background-color: #d4811c;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+}
 
-        .property-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 8px;
+    color: #666;
+}
 
-        .property-info {
-            padding: 15px;
-        }
 
-        .property-title {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
 
-        .property-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        top: 60px;
+    }
 
-        .view-button {
-            background-color: #d4811c;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            width: 100%;
-            cursor: pointer;
-        }
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+        margin-top: 120px;
+    }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 8px;
-            color: #666;
-        }
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-        .user-menu {
-            background: #CD853F;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .property-grid {
+        grid-template-columns: 1fr;
+    }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 10px;
-                top: 60px;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 10px;
-                margin-top: 120px;
-            }
-
-            .search-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .property-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .top-header {
-                flex-direction: column;
-                height: auto;
-                text-align: center;
-                padding: 10px;
-            }
-        }
+    .top-header {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+        padding: 10px;
+    }
+}
+        
     </style>
 </head>
 <body>
