@@ -208,16 +208,16 @@
         <!-- Necessário que sua rota aceite POST e processe esses campos -->
         <form  action="{{ url_for('views.vistoria_finalizada') }}" method="POST" enctype="multipart/form-data">
             <div class="vistoria">
-                <h3>Título</h3>
+                <h3>Título:</h3>
                 <br>
                 <input type="text" class="input-style" name="titulo" id="titulo" placeholder="Título da Vistoria" required>
 
-                <h3>Descrição</h3>
+                <h3>Ambiente Vistoriado:</h3>
                 <br>
                 <textarea class="input-style" name="descricao" id="descricao"
                           placeholder="Descrição da Situação do Imóvel" required></textarea>
 
-                <h3>Observações Importantes</h3>
+                <h3>Observações Importantes:</h3>
                 <br>
                 <textarea class="input-style" name="observacoes" id="observacoes"
                           placeholder="Observações"></textarea>
@@ -231,6 +231,8 @@
                 <button type="submit" class="schedule-visit">Finalizar Vistoria</button>
             </div>
         </form>
+        <!--Não conseguimos implementar esse botão, mas ao ser implementado, ele abriria uma nova "caixa" onde as informações seriam preenchidas, e onde teria a adição de mais foto-->
+        <button class="botao_add_ambiente">Adicionar Ambiente Vistoriado</button>
     </main>
 </body>
 </html>
