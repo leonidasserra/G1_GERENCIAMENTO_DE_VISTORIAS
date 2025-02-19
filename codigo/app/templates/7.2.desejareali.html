@@ -211,7 +211,9 @@
             <div class="modal">
                 <h2>Deseja realmente iniciar a vistoria?</h2>
                 <div class="modal-buttons">
-                    <a href="{{ url_for('views.vistoria', imovel_id=imovel_id) }}"><button class="btn">Sim</button></a>
+                    <a href="{{ url_for('views.vistoria', imovel_id=session['imovel_id']) }}">
+                        <button class="btn">Sim</button>
+                    </a>                                        
                     <a href="{{ url_for('views.pos_agendamento') }}"><button class="btn">Não</button></a>
 
                 </div>

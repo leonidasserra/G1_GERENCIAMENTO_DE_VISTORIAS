@@ -31,24 +31,17 @@ class Funcionario(db.Model):
 
 # Tabela de Imóveis
 class Imovel(db.Model):
-    __tablename__ = 'imoveis'
     id = db.Column(db.Integer, primary_key=True)
-    descricao = db.Column(db.String, nullable=False)
-    endereco = db.Column(db.String, nullable=False)
-    tipo = db.Column(db.String, nullable=False)
-    status = db.Column(db.String, default='Ativo')
-    proprietario_id = db.Column(db.Integer, db.ForeignKey('funcionarios.id'))
-    proprietario = db.relationship('Funcionario', backref='imoveis')
+    nome = db.Column(db.String(100), nullable=False)
+    imagem = db.Column(db.String(255), nullable=True)
+    endereco = db.Column(db.String(255), nullable=False)
+    descricao = db.Column(db.Text, nullable=True)
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "descricao": self.descricao,
-            "endereco": self.endereco,
-            "tipo": self.tipo,
-            "status": self.status,
-            "proprietario_id": self.proprietario_id
-        }
+    def __init__(self, nome, imagem, endereco, descricao):
+        self.nome = nome
+        self.imagem = imagem
+        self.endereco = endereco
+        self.descricao = descricao
 
 # Tabela de Vistorias
 class Vistoria(db.Model):

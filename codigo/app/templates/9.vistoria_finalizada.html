@@ -148,42 +148,42 @@
 </aside>
 
 
-    <main class="main-content">
-        <div class="header">
-            <h1>Vistoria Finalizada</h1>
+<main class="main-content">
+    <div class="header">
+        <h1>Vistoria Finalizada</h1>
+    </div>
+
+    <div class="property-card">
+        <div class="property-image-container">
+            <img src="{{ session['relatorio_vistoria']['Fotos'][0] if session['relatorio_vistoria']['Fotos'] else url_for('static', filename='images/default.jpg') }}" alt="{{ session['relatorio_vistoria']['Nome do Imóvel'] }}" class="property-image">
+        </div>
+        <div class="property-info-container">
+            <h2>{{ session['relatorio_vistoria']['Nome do Imóvel'] }}</h2>
+            <p>{{ session['relatorio_vistoria']['Endereço'] }}</p>
+        </div>
+        <div class="button-container">
+            <form method="POST" action="{{ url_for('views.emitir_relatorio') }}">
+                <button type="submit" class="schedule-visit">Emitir Relatório</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="content-grid">
+        <div class="overview-card">
+            <h3>Visão Geral</h3>
+            <br>
+            <p><strong>Data da Vistoria:</strong> {{ session['relatorio_vistoria']['Data da Vistoria'] }}</p>
+            <p><strong>Descrição:</strong> {{ session['relatorio_vistoria']['Descrição'] }}</p>
+            <p><strong>Observações:</strong> {{ session['relatorio_vistoria']['Observações'] }}</p>
         </div>
 
-        <div class="property-card">
-            <div class="property-image-container">
-                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}" alt="Casa no Calhau" class="property-image">
-            </div>
-            <div class="property-info-container">
-                <h2>Casa no Calhau</h2>
-                <p>São Luis, Maranhão/MA</p>
-            </div>
-            <div class="button-container">
-                <form method="POST" action="{{ url_for('views.emitir_relatorio') }}">
-                    <button type="submit" class="schedule-visit">Emitir Relatório</button>
-                </form>
-            </div>
+        <div class="location-card">
+            <h3>Localização</h3>
+            <br>
+            <p>Endereço: {{ session['relatorio_vistoria']['Endereço'] }}</p>
         </div>
-        
-        <div class="content-grid">
-            <div class="overview-card">
-                <h3>Visão Geral</h3>
-                <br>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eos nostrum fugit, cum, autem ipsa sapiente labore et quibusdam quisquam minima pariatur sunt laborum numquam inventore, sed debitis.</p>
-            </div>
+    </div>
 
-            <div class="location-card">
-                <h3>Localização</h3>
-                <br>
-                <p>Endereço: Rua dos Flamingos, 354</p>
-                <p>Bairro: Calhau</p>
-                <p>Cidade: São Luis-MA</p>
-                <p>CEP: 625-854</p>
-            </div>
-        </div>
 
         <div class="emissao_relatorio">
             <h3>Emissão de Relatório</h3>
