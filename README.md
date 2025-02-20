@@ -1,12 +1,8 @@
 Reconhecimentos e Direitos Autorais
 
-<<<<<<< HEAD
-@autor: [Leônidas Serra, Isabela OLiveira, Maria Laura, Luís Felipe, Antonio Claudino]
-=======
-@autor: [Leônidas Serra, Isabela OLiveira,Maria Laura Cronemberger, Luís Felipe]
->>>>>>> c7b532da8dc84734bba1ae90df030e602f17f094
+@autor: [Leônidas Serra, Isabela Oliveira, Maria Laura Cronemberger, Luís Felipe]
 
-@contato: [Seus Emails - se quiserem]
+@contato: [isabela.moreira8721@gmail.com, leonidas.serra16@gmail.com, maria.cronemberger@discente.ufma.br]
 
 @data última versão: [27/01/2025]
 
