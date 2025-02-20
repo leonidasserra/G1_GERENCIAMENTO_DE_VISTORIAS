@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions - Imóvel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * 
+        .property-card {
+            background-color: #CD853F;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .property-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .property-image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .input-style {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            font-weight: normal;
+            width: 100%;
+            cursor: text;
+            text-align: left;
+            color: black; /* Para ficar visível */
+            /*border-bottom: 1px solid #ccc;  Adiciona um traço inferior para destacar o input */
+}
+        
+
+        .input-style::placeholder {
+            color: rgba(0, 0, 0, 0.5); /* Agora o placeholder é cinza escuro */
+            font-size: 15px;
+}
+
+        .schedule-visit {
+            background-color: white;
+            color: #8B4513;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+         .button-container {
+        margin-left: auto; /* Move os botões para a direita */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+         }
+
+
+        .vistoria {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .button-container {
+        margin-left: auto; /* Move os botões para a direita */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+         }
+
+
+
+        .modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            background-color: #CD853F;
+            color: white;
+        }
+
+        .btn:hover{
+            background-color: #be7328 ;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                top: 60px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 120px;
+                padding: 10px;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .property-image-container {
+                width: 100%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">V</div>
+    </header>
+
+<!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+<aside class="sidebar">
+    <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+    <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
+    <div class="logout">
+        <a href="{{ url_for('views.login') }}">Sair</a>
+    </div>
+</aside>
+
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Vistoria do Imóvel</h1>
+        </div>
+
+        <div class="property-card">
+            <div class="property-image-container">
+                <img src="pexels-binyaminmellish-1396122 (1).jpg" alt="Casa no Calhau" class="property-image">
+            </div>
+            <div class="property-info-container">
+                <h2>Casa no Calhau</h2>
+                <p>São Luis, Maranhão/MA</p>
+            </div>
+            <div class="button-container">
+                <a href="9.vistoria_finalizada.html"><button class="schedule-visit">Finalizar Vistoria</button></a>
+               
+            </div>
+        </div>
+
+        <br>
+        <h1 style="font-size: 20px;">Informações Sobre a Vistoria</h1>
+        
+        <div class="vistoria">
+            <h3>Título</h3>
+            <br>
+            <textarea class="input-style" placeholder="Nome do Imóvel"></textarea>
+            <h3>Descrição</h3>
+            <br>
+            <textarea class="input-style" placeholder="Descrição da Situação do Imóvel"></textarea>
+            <h3>Observações Importantes</h3>
+            <br>
+            <textarea class="input-style" placeholder="Observações"></textarea>
+            <h3>Anexar Fotos</h3>
+            <br>
+            <input style="size: 10px;" type="file"  placeholder="Fotos Vistoria">
+            
+        </div>
+
+                <!--Parte do overlay-->
+                <div class="overlay">
+                    <div class="modal">
+                        <h2>Deseja finalizar a vistoria?</h2>
+                        <div class="modal-buttons">
+                            <a href="{{ url_for('views.vistoria_finalizada') }}"><button class="btn">Sim</button></a>
+                            <a href="{{ url_for('views.vistoria', imovel_id=session.get('imovel', {}).get('id')) }}"><button class="btn">Não</button></a>
+
+                        </div>
+                    </div>
+                </div>
+    </main>
+</body>
+</html>

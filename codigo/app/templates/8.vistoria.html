@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions - Vistoria</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * 
+        .property-card {
+            background-color: #CD853F;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .property-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .property-image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .input-style {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            font-weight: normal;
+            width: 100%;
+            cursor: text;
+            text-align: left;
+            color: black; /* Para ficar visível */
+            /*border-bottom: 1px solid #ccc;  Adiciona um traço inferior para destacar o input */
+}
+        
+
+        .input-style::placeholder {
+            color: rgba(0, 0, 0, 0.5); /* Agora o placeholder é cinza escuro */
+            font-size: 15px;
+}
+
+        .schedule-visit {
+            background-color: white;
+            color: #8B4513;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+         .button-container {
+        margin-left: auto; /* Move os botões para a direita */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+         }
+
+
+        .vistoria {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .button-container {
+        margin-left: auto; /* Move os botões para a direita */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+         }
+
+
+                 /* AQUI É O CSS DO DROPDOWN MENU E DO BOTÃO DO AMBIENTE*/
+
+                 .dropdown-select {
+                 width: 100%;
+                 padding: 8px;
+                 margin-top: 10px;
+                 border: 1px solid #ccc;
+                 border-radius: 4px;
+                 background-color: white;
+                 color: #333;
+                 font-size: 16px;
+                 outline: none;
+             }
+
+            .dropdown-select:focus {
+                border-color: #CD853F;
+            }
+
+            .botao_add_ambiente {
+            background-color: #d4811c;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                top: 60px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 120px;
+                padding: 10px;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .property-image-container {
+                width: 100%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                text-align: center;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
+    </header>
+
+    <!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+    <aside class="sidebar">
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+        <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+        <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>    
+        <div class="logout">
+            <a href="{{ url_for('views.login') }}">Sair</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Vistoria do Imóvel</h1>
+        </div>
+
+        <!-- Exemplo de exibir dados do imóvel e a data, puxados da rota -->
+        <div class="property-card">
+            <div class="property-image-container">
+                <!-- Ajuste o 'src' caso precise usar a imagem do próprio imóvel -->
+                <img src="{{ url_for('static', filename='images/casa-calhau.jpg') }}"
+                     alt="Casa no Calhau"
+                     class="property-image">
+            </div>
+            <div class="property-info-container">
+                <!-- Caso 'imovel' e 'data_vistoria' sejam passados pela rota -->
+                <h2>{{ imovel.nome if imovel else 'Nome do Imóvel' }}</h2>
+                <p>São Luis, Maranhão/MA</p>
+                <p><strong>Data Agendada:</strong> {{ data_vistoria if data_vistoria else 'Data não informada' }}</p>
+            </div>
+        </div>
+
+        <br>
+        <h1 style="font-size: 20px;">Informações Sobre a Vistoria</h1>
+        
+        <!-- Ação ajustada para chamar a rota 'views.vistoria' com o ID do imóvel -->
+        <!-- Necessário que sua rota aceite POST e processe esses campos -->
+        <form  action="{{ url_for('views.vistoria_finalizada') }}" method="POST" enctype="multipart/form-data">
+            <div class="vistoria">
+                <h3>Título:</h3>
+                <br>
+                <input type="text" class="input-style" name="titulo" id="titulo" placeholder="Título da Vistoria" required>
+
+                <h3>Ambiente Vistoriado:</h3>
+                <br>
+                <textarea class="input-style" name="descricao" id="descricao"
+                          placeholder="Descrição da Situação do Imóvel" required></textarea>
+
+                <h3>Observações Importantes:</h3>
+                <br>
+                <textarea class="input-style" name="observacoes" id="observacoes"
+                          placeholder="Observações"></textarea>
+
+                <h3>Anexar Fotos</h3>
+                <br>
+                <!-- Para anexar múltiplas fotos, use 'multiple' e 'accept=image/*' se desejar restringir a imagens -->
+                <input type="file" name="fotos" id="fotos" multiple accept="image/*">
+
+                <br><br>
+                <button type="submit" class="schedule-visit">Finalizar Vistoria</button>
+            </div>
+        </form>
+        <!--Não conseguimos implementar esse botão, mas ao ser implementado, ele abriria uma nova "caixa" onde as informações seriam preenchidas, e onde teria a adição de mais foto-->
+        <button class="botao_add_ambiente">Adicionar Ambiente Vistoriado</button>
+    </main>
+</body>
+</html>

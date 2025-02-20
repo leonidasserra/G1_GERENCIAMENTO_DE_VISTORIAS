@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions - Imóvel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * 
+        .emissao_relatorio {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .relatorio-image {
+            width: 150px;
+            gap: 10px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .relatorio-content {
+            flex-grow: 1;
+        }
+
+        .visualizar-link {
+            padding: 10px 20px;
+            color: #8B4513;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                top: 60px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 120px;
+                padding: 10px;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .property-image-container {
+                width: 100%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">V</div>
+    </header>
+
+    <!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+    <aside class="sidebar">
+        <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+        <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+        <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+        <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+        <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>
+        <div class="logout">
+            <a href="{{ url_for('views.login') }}">Sair</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Editar Imóvel</h1>
+        </div>
+
+        <div class="emissao_relatorio">
+            <div class="relatorio-image">
+                <img src="{{ url_for('static', filename='images/casa-calhau.png') }}" width="150" height="100" />
+            </div>
+            <div class="relatorio-content">
+                <h3>Casa no Calhau</h3>
+                <br />
+                <p>Data Agendada: DD/MM/AAAA</p>
+                <p>Proprietário do Imóvel: José Maria</p>
+            </div>
+            <!-- Exemplo de link para editar imóvel (ajuste conforme seu endpoint Python) -->
+            <a href="{{ url_for('views.pos_agendamento') }}" class="visualizar-link">Editar Imóvel</a>
+            <a href="#" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
+        </div>
+
+        <div class="emissao_relatorio">
+            <div class="relatorio-image">
+                <img src="{{ url_for('static', filename='images/casa-calhau.png') }}" width="150" height="100" />
+            </div>
+            <div class="relatorio-content">
+                <h3>Apartamento no Olho D'água</h3>
+                <br />
+                <p>Data Agendada: DD/MM/AAAA</p>
+                <p>Proprietário do Imóvel: Hodete Pereira Alencar</p>
+            </div>
+            <a href="#" class="visualizar-link">Editar Imóvel</a>
+            <a href="{{ url_for('views.deseja_desativar', imovel_id=imovel['id']) }}" class="visualizar-link" style="color: red;">Desativar Imóvel</a>
+        </div>
+
+        <!--Parte do overlay-->
+       <!--- <div class="overlay">
+            <div class="modal">
+                <h2>Deseja desativar o imóvel?</h2>
+                <div class="modal-buttons">
+                    <button class="btn">Sim</button> -->
+                    <!--LEONIDAS NESSE HREF TU PRECISA COLOCAR A URL DE 14.editarimovel-->
+                    <!---<a href="{{ url_for('views.editar_imovel', imovel_id=imovel['id']) }}">
+                        <button class="btn">Não</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>-->
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVanguard Solutions - Imóvel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * 
+        .property-card {
+            background-color: #CD853F;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .property-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .property-image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .schedule-visit {
+            background-color: white;
+            color: #8B4513;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .overview-card, .location-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                top: 60px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 120px;
+                padding: 10px;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .property-image-container {
+                width: 100%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .top-header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="company-name">TechVanguard Solutions</div>
+        <div class="user-menu">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="Usuário">
+        </div>
+    </header>
+
+<!--LEONIDAS TEM QUE CONCERTAR ESSES 3 VIEWS, QUE SÃO REFERENTES AOS TEMPLATES 10, 11 E 12:-->
+<aside class="sidebar">
+    <a href="{{ url_for('views.menu') }}" class="nav-item">Menu</a>
+    <a href="{{ url_for('views.metricas') }}" class="nav-item">Métricas</a>
+    <a href="{{ url_for('views.vistorias_realizadas') }}" class="nav-item">Vistorias Realizadas</a>
+    <a href="{{ url_for('views.vistorias_agendadas') }}" class="nav-item">Vistorias Agendadas</a>
+    <a href="{{ url_for('views.configuracoes') }}" class="nav-item">Configurações</a>    
+    <div class="logout">
+        <a href="{{ url_for('views.login') }}">Sair</a>
+    </div>
+</aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>{{ imovel['nome'] }}</h1>
+        </div>
+
+        <div class="property-card">
+            <div class="property-image-container">
+                <img src="{{ url_for('static', filename=imovel['imagem']) }}" alt="{{ imovel['nome'] }}" class="property-image">
+            </div>
+            <div class="property-info-container">
+                <h2>{{ imovel['nome'] }}</h2>
+                <p>{{ imovel['endereco'] }}</p>
+                <p>{{ imovel['descricao'] }}</p>
+
+
+                <!-- ✅ Corrigido o formulário para redirecionar para pós-agendamento -->
+                <form method="POST" action="{{ url_for('views.pos_agendamento') }}">
+                    <input type="hidden" name="imovel_id" value="{{ imovel['id'] }}">
+                    <label for="data_vistoria">Selecione uma data:</label>
+                    <input type="date" name="data_vistoria" required>
+                    <button type="submit" class="schedule-visit">Agendar Vistoria</button>
+                </form>                
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="overview-card">
+                <h3>Visão Geral</h3>
+                <p>{{ imovel['descricao'] }}</p>
+            </div>
+
+            <div class="location-card">
+                <h3>Localização</h3>
+                <p>Endereço: {{ imovel['endereco'] }}</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

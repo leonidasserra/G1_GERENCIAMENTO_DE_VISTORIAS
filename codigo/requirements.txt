@@ -1,0 +1,23 @@
+flask==2.3.2
+flask-sqlalchemy==3.0.5
+flask-mail==0.9.1
+flask-migrate==4.0.4
+flask-swagger-ui==4.11.1
+python-dotenv==1.0.0
+psycopg2-binary==2.9.6  # Para conexão com PostgreSQL
+pyjwt==2.8.0  # Para autenticação JWT
+werkzeug==2.3.4  # Necessário para segurança de senhas e suporte ao Flask
+gunicorn==20.1.0  # Servidor WSGI para produção
+datetime
+dotenv
+flask
+flask_mail
+flask_session
+functools
+io
+jwt
+os
+psycopg2
+re
+reportlab
+werkzeug

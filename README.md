@@ -1,6 +1,10 @@
 Reconhecimentos e Direitos Autorais
 
+<<<<<<< HEAD
 @autor: [Leônidas Serra, Isabela OLiveira, Maria Laura, Luís Felipe, Antonio Claudino]
+=======
+@autor: [Leônidas Serra, Isabela OLiveira,Maria Laura Cronemberger, Luís Felipe]
+>>>>>>> c7b532da8dc84734bba1ae90df030e602f17f094
 
 @contato: [Seus Emails - se quiserem]
 
@@ -8,7 +12,7 @@ Reconhecimentos e Direitos Autorais
 
 @versão: 1.0
 
-@outros repositórios: [https://github.com/leonidasserra/G1_GERENCIAMENTO_DE_VISTORIAS]
+@outros repositórios: [https://github.com/Su6eate9/gerenciamento-vistoria-imoveis]
 
 @Agradecimentos: Universidade Federal do Maranhão (UFMA), Professor Doutor Thales Levi Azevedo Valente, e colegas de curso.
 
